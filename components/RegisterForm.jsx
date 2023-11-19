@@ -1,22 +1,27 @@
 "use client"
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
+import profile from '@/assets/profile.png'
+import convertToBase64 from "@/lib/convert";
 
 export default function RegisterForm() {
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [error, setError] = useState("User Exists")
+    const [file, setFile] = useState("")
+    const [error, setError] = useState(null)
 
     const router = useRouter()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        if (!name || !email || !password) {
+        if (!name || !email || !password || !file) {
             setError("All fields are necessary.")
             return
         }
@@ -43,7 +48,7 @@ export default function RegisterForm() {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    name, email, password
+                    name, email, password, file
                 })
             })
 
@@ -59,26 +64,40 @@ export default function RegisterForm() {
         }
     }
 
+    const onUpload = async e => {
+        const base64 = await convertToBase64(e.target.files[0])
+        setFile(base64)
+    }
+
   return (
     <div className="grid place-items-center h-screen">
         <div className="shadow-lg p-5 rounded-lg border-t-4 border-green-400">
             <h1 className="text-xl font-bold my-4">Register</h1>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                <div>
+                    <label htmlFor="profile_img">
+                        <Image src={file || profile} alt="profile_img" width={100} height={100} className="aspect-square rounded-full" />
+                    </label>
+                    <input onChange={onUpload} type="file" id="profile_img" className="hidden" />
+                </div>
                 <input 
                     onChange={e => setName(e.target.value)} 
                     type="text" 
                     placeholder="Full Name" 
+                    required
                 />
                 <input 
                     onChange={e => setEmail(e.target.value)}
-                    type="text" 
+                    type="email" 
                     placeholder="Email" 
+                    required
                 />
                 <input 
                     onChange={e => setPassword(e.target.value)}
                     type="password" 
                     placeholder="Password" 
+                    required
                 />
                 <button className="bg-green-600 text-white font-bold cursor-pointer py-2 px-6">
                     Register

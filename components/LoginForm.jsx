@@ -9,7 +9,7 @@ export default function LoginForm() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
-    const [error, setError] = useState("Invalid details")
+    const [error, setError] = useState(null)
 
     const router = useRouter()
 
@@ -24,11 +24,11 @@ export default function LoginForm() {
             })
 
             if (res.error) {
-                setError("invalid Credentials")
+                setError("Invalid Credentials")
                 return
             }
 
-            router.replace("dashboard")
+            router.replace("face")
         } catch (error) {
             console.log(error)
         }
@@ -42,13 +42,15 @@ export default function LoginForm() {
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                 <input 
                     onChange={e => setEmail(e.target.value)}
-                    type="text" 
+                    type="email" 
                     placeholder="Email" 
+                    required
                 />
                 <input 
                     onChange={e => setPassword(e.target.value)}
                     type="password" 
                     placeholder="Password" 
+                    required
                 />
                 <button className="bg-green-600 text-white font-bold cursor-pointer py-2 px-6">
                     Login

@@ -1,10 +1,19 @@
 'use client'
 
 import { signOut, useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 
 export default function UserInfo() {
 
     const { data: session } = useSession()
+    const router = useRouter()
+
+    useEffect(() => {
+        if (!session)
+            router.replace("/") 
+    }, [session])
+
 
   return (
     <div className="grid place-items-center h-screen">

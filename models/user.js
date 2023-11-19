@@ -13,6 +13,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    profile: {
+        type: String,
+        required: true
+    }
 },
 {
     timestamps: true
