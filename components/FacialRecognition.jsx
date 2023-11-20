@@ -53,7 +53,7 @@ export default function FacialRecognition() {
 
       if (answer.message) {
         // Redirect to next page
-        router.replace("/dashboard")
+        router.replace("/stego")
       } else {
         // Remove sesh token
         await signOut()
