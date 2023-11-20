@@ -13,7 +13,6 @@ export async function POST(req) {
         const secret = await data.secret
         
         const msg = decode(img)
-        console.log(msg, secret)
         
         if (msg === secret)
             return NextResponse.json({ value: true })
