@@ -14,6 +14,7 @@ export default function RegisterForm() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [file, setFile] = useState("")
+    const [secret, setSecret] = useState("")
     const [error, setError] = useState(null)
 
     const router = useRouter()
@@ -48,7 +49,7 @@ export default function RegisterForm() {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    name, email, password, file
+                    name, email, password, file, secret
                 })
             })
 
@@ -97,6 +98,14 @@ export default function RegisterForm() {
                     onChange={e => setPassword(e.target.value)}
                     type="password" 
                     placeholder="Password" 
+                    minLength={4}
+                    required
+                />
+                <input 
+                    onChange={e => setSecret(e.target.value)} 
+                    type="text" 
+                    placeholder="Secret" 
+                    minLength={4}
                     required
                 />
                 <button className="bg-green-600 text-white font-bold cursor-pointer py-2 px-6">

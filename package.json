@@ -11,14 +11,14 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
-    "fs": "^0.0.1-security",
     "mongoose": "^8.0.0",
     "next": "14.0.1",
     "next-auth": "^4.24.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-speech-recognition": "^3.10.0",
     "react-webcam": "^7.2.0",
-    "steggy": "^2.0.1"
+    "regenerator-runtime": "^0.14.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",
